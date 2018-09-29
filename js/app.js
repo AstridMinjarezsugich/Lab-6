@@ -1,66 +1,338 @@
 'use strict';
+var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
+// start out with planning the objects that collect data and make site work
+var pikePlace = {
+ // variable for a location with set minimum and maximum cookies sold
+ name: 'First and Pike',
+ min: 23,
+ max: 65,
+ avgCookiesPerSale: 6.3,
+ cookiesSoldEachHour: [],
+ avgCustArr: [],
+ totalCooks: 0,
+ // to store a bunch of values, not only to calculate but also to store
 
-var pikePlace = { //Planning out objects properties that make the site work
-  name: 'First and Pike',
-  min: 23,
-  max: 65,
-  avgCookiesPerSale: 6.3,
+ // need function to calculate cookies sales per hour
+ // method that generates a random number
+ calculateCustPerHour: function () {
+   for (var i = 0; i < hours.length; i++) {
+     var randomAmount = Math.floor(Math.random() * (this.max - this.min)) + this.min;
+     this.avgCustArr.push(randomAmount);
+     // adds a random amount of cust for each hour to the array
+     // math.round will get me .5 and higher to go up and anything less to round down
+   }
+ },
+ // by adding coma it keeps it open
+ //method to calculate the cookies sold each hour, over all 15 hours and to store them in array
+ calculateCookiesSoldEachHour: function () {
+   for (var j = 0; j < hours.length; j++) {
+     this.totalCooks += this.avgCustArr[j];
+     console.log("**********", this.totalCooks)
+     // each hour of the day put amount of cust. mult by cook for sale, this is to calculate 15 times
+     //"this" points back to the object in which the object is called in
+   }
+ },
+
+ //creat list and append it to the DOM-document, object, model
+
+ listThings: function () {
+   var container = document.createElement('div');
+   container.innerHTML = '<h3>' + this.name + '</h3>';
+   document.body.appendChild(container);
+
+   var list = document.createElement('ul');
+   var listArr =[];
+   for(var i =0; i < hours.length; i++){
+     if(i > 5){
+       listArr.push('<li>' + hours[i] + ':' + this.avgCustArr[i] + 'cookies</li>');
+     } else {
+      listArr.push('<li>' + hours[i] + ':' + this.avgCustArr[i] + 'cookies</li>');
+     }
+   }
+   
+
+   listArr.push('<li>Totals: ' + this.totalCooks + 'cookies</li>');
+
+   var fullString = listArr.join('');
+   list.innerHTML = fullString;
+   document.body.appendChild(list)
+  
+ }
+
+}
+
+
+
+pikePlace.calculateCustPerHour();
+pikePlace.calculateCookiesSoldEachHour();
+pikePlace.listThings();
+
+
+var seaTac = {
+  // variable for a location with set minimum and maximum cookies sold
+  name: 'SeaTac Airport',
+  min: 3,
+  max: 24,
+  avgCookiesPerSale: 1.2,
   cookiesSoldEachHour: [],
-};
-
-pikePlace.calculateCustomersPerHour = function(){ //function to calculate customers per hour
-  var randomAmount = Math.floor(Math.random() * (this.max - this.min + 1) + this.min);
-  return Math.round(randomAmount * this.avgCookiesPerSale);
-};
-
-pikePlace.calculateCookiesSoldEAchHour = function(){ //amount of cookies sold for length of time
-  console.log(this);
-  for(var i = 0; i < 15; i++){
-    this.cookiesSoldEachHour.push(this.calculateCustomersPerHour());
-  }
-};
-
-pikePlace.renderHours = function(){
-  this.calculateCookiesSoldEAchHour(); // calling the data needed to give the amount of cookies sold
-  
-  var storesContainer = document.getElementById('stores');
-  console.log(storesContainer);
-  var headerEl = document.createElement('h2');
-  console.log(headerEl);
-  headerEl.textContent = this.name; 
-  storesContainer.appendChild(headerEl);
-  
-  var ulEl = document.createElement('ul'); //create an element
-  console.log(this.cookiesSoldEachHour);
-
-  for(var i in this.cookiesSoldEachHour){ //give ul content
-      //same as
-     //for (var i = 0; i < this.cookiesSoldEachHour.Length; i ++)
+  avgCustArr: [],
+  totalCooks: 0,
+  // to store a bunch of values, not only to calculate but also to store
+ 
+  // need function to calculate cookies sales per hour
+  // method that generates a random number
+  calculateCustPerHour: function () {
+    for (var i = 0; i < hours.length; i++) {
+      var randomAmount = Math.floor(Math.random() * (this.max - this.min)) + this.min;
+      this.avgCustArr.push(randomAmount);
+      // adds a random amount of cust for each hour to the array
+      // math.round will get me .5 and higher to go up and anything less to round down
+    }
+  },
+  // by adding coma it keeps it open
+  //method to calculate the cookies sold each hour, over all 15 hours and to store them in array
+  calculateCookiesSoldEachHour: function () {
+    for (var j = 0; j < hours.length; j++) {
+      this.totalCooks += this.avgCustArr[j];
+      console.log("**********", this.totalCooks)
+      // each hour of the day put amount of cust. mult by cook for sale, this is to calculate 15 times
+      //"this" points back to the object in which the object is called in
+    }
+  },
+ 
+  //creat list and append it to the DOM-document, object, model
+ 
+  listThings: function () {
+    var container = document.createElement('div');
+    container.innerHTML = '<h3>' + this.name + '</h3>';
+    document.body.appendChild(container);
+ 
+    var list = document.createElement('ul');
+    var listArr =[];
+    for(var i =0; i < hours.length; i++){
+      if(i > 5){
+        listArr.push('<li>' + hours[i] + ':' + this.avgCustArr[i] + 'cookies</li>');
+      } else {
+       listArr.push('<li>' + hours[i] + ':' + this.avgCustArr[i] + 'cookies</li>');
+      }
+    }
     
-    var listItemEl = document.createElement('li');
-    console.log(listItemEl);
-    listItemEl.textContent = this.cookiesSoldEachHour[i];
-    ulEl.appendChild(listItemEl);
+ 
+    listArr.push('<li>Totals: ' + this.totalCooks + 'cookies</li>');
+ 
+    var fullString = listArr.join('');
+    list.innerHTML = fullString;
+    document.body.appendChild(list)
+   
   }
-  
-  //append the ul
-  storesContainer.appendChild(ulEl);
-};
-pikePlace.renderHours();
-//pikePlace.calculateCookiesSoldEAchHour();
+ 
+ }
+ 
+ 
+ 
+ seaTac.calculateCustPerHour();
+ seaTac.calculateCookiesSoldEachHour();
+ seaTac.listThings();
+
+ var seattleCenter = {
+  // variable for a location with set minimum and maximum cookies sold
+  name: 'Seattle Center',
+  min: 11,
+  max: 38,
+  avgCookiesPerSale: 3.7,
+  cookiesSoldEachHour: [],
+  avgCustArr: [],
+  totalCooks: 0,
+  // to store a bunch of values, not only to calculate but also to store
+ 
+  // need function to calculate cookies sales per hour
+  // method that generates a random number
+  calculateCustPerHour: function () {
+    for (var i = 0; i < hours.length; i++) {
+      var randomAmount = Math.floor(Math.random() * (this.max - this.min)) + this.min;
+      this.avgCustArr.push(randomAmount);
+      // adds a random amount of cust for each hour to the array
+      // math.round will get me .5 and higher to go up and anything less to round down
+    }
+  },
+  // by adding coma it keeps it open
+  //method to calculate the cookies sold each hour, over all 15 hours and to store them in array
+  calculateCookiesSoldEachHour: function () {
+    for (var j = 0; j < hours.length; j++) {
+      this.totalCooks += this.avgCustArr[j];
+      console.log("**********", this.totalCooks)
+      // each hour of the day put amount of cust. mult by cook for sale, this is to calculate 15 times
+      //"this" points back to the object in which the object is called in
+    }
+  },
+ 
+  //creat list and append it to the DOM-document, object, model
+ 
+  listThings: function () {
+    var container = document.createElement('div');
+    container.innerHTML = '<h3>' + this.name + '</h3>';
+    document.body.appendChild(container);
+ 
+    var list = document.createElement('ul');
+    var listArr =[];
+    for(var i =0; i < hours.length; i++){
+      if(i > 5){
+        listArr.push('<li>' + hours[i] + ':' + this.avgCustArr[i] + 'cookies</li>');
+      } else {
+       listArr.push('<li>' + hours[i] + ':' + this.avgCustArr[i] + 'cookies</li>');
+      }
+    }
+    
+ 
+    listArr.push('<li>Totals: ' + this.totalCooks + 'cookies</li>');
+ 
+    var fullString = listArr.join('');
+    list.innerHTML = fullString;
+    document.body.appendChild(list)
+   
+  }
+ 
+ }
+ 
+ 
+ 
+ seattleCenter.calculateCustPerHour();
+ seattleCenter.calculateCookiesSoldEachHour();
+ seattleCenter.listThings();
 
 
+ var capitolHill = {
+  // variable for a location with set minimum and maximum cookies sold
+  name: 'Capitol Hill',
+  min: 20,
+  max: 38,
+  avgCookiesPerSale: 2.3,
+  cookiesSoldEachHour: [],
+  avgCustArr: [],
+  totalCooks: 0,
+  // to store a bunch of values, not only to calculate but also to store
+ 
+  // need function to calculate cookies sales per hour
+  // method that generates a random number
+  calculateCustPerHour: function () {
+    for (var i = 0; i < hours.length; i++) {
+      var randomAmount = Math.floor(Math.random() * (this.max - this.min)) + this.min;
+      this.avgCustArr.push(randomAmount);
+      // adds a random amount of cust for each hour to the array
+      // math.round will get me .5 and higher to go up and anything less to round down
+    }
+  },
+  // by adding coma it keeps it open
+  //method to calculate the cookies sold each hour, over all 15 hours and to store them in array
+  calculateCookiesSoldEachHour: function () {
+    for (var j = 0; j < hours.length; j++) {
+      this.totalCooks += this.avgCustArr[j];
+      console.log("**********", this.totalCooks)
+      // each hour of the day put amount of cust. mult by cook for sale, this is to calculate 15 times
+      //"this" points back to the object in which the object is called in
+    }
+  },
+ 
+  //creat list and append it to the DOM-document, object, model
+ 
+  listThings: function () {
+    var container = document.createElement('div');
+    container.innerHTML = '<h3>' + this.name + '</h3>';
+    document.body.appendChild(container);
+ 
+    var list = document.createElement('ul');
+    var listArr =[];
+    for(var i =0; i < hours.length; i++){
+      if(i > 5){
+        listArr.push('<li>' + hours[i] + ':' + this.avgCustArr[i] + 'cookies</li>');
+      } else {
+       listArr.push('<li>' + hours[i] + ':' + this.avgCustArr[i] + 'cookies</li>');
+      }
+    }
+    
+ 
+    listArr.push('<li>Totals: ' + this.totalCooks + 'cookies</li>');
+ 
+    var fullString = listArr.join('');
+    list.innerHTML = fullString;
+    document.body.appendChild(list)
+   
+  }
+ 
+ }
+ 
+ 
+ 
+ capitolHill.calculateCustPerHour();
+ capitolHill.calculateCookiesSoldEachHour();
+ capitolHill.listThings();
 
 
-
-
-
-
-
-
-
-
-
+ var Alki = {
+  // variable for a location with set minimum and maximum cookies sold
+  name: 'Alki',
+  min: 2,
+  max: 16,
+  avgCookiesPerSale: 4.6,
+  cookiesSoldEachHour: [],
+  avgCustArr: [],
+  totalCooks: 0,
+  // to store a bunch of values, not only to calculate but also to store
+ 
+  // need function to calculate cookies sales per hour
+  // method that generates a random number
+  calculateCustPerHour: function () {
+    for (var i = 0; i < hours.length; i++) {
+      var randomAmount = Math.floor(Math.random() * (this.max - this.min)) + this.min;
+      this.avgCustArr.push(randomAmount);
+      // adds a random amount of cust for each hour to the array
+      // math.round will get me .5 and higher to go up and anything less to round down
+    }
+  },
+  // by adding coma it keeps it open
+  //method to calculate the cookies sold each hour, over all 15 hours and to store them in array
+  calculateCookiesSoldEachHour: function () {
+    for (var j = 0; j < hours.length; j++) {
+      this.totalCooks += this.avgCustArr[j];
+      console.log("**********", this.totalCooks)
+      // each hour of the day put amount of cust. mult by cook for sale, this is to calculate 15 times
+      //"this" points back to the object in which the object is called in
+    }
+  },
+ 
+  //creat list and append it to the DOM-document, object, model
+ 
+  listThings: function () {
+    var container = document.createElement('div');
+    container.innerHTML = '<h3>' + this.name + '</h3>';
+    document.body.appendChild(container);
+ 
+    var list = document.createElement('ul');
+    var listArr =[];
+    for(var i =0; i < hours.length; i++){
+      if(i > 5){
+        listArr.push('<li>' + hours[i] + ':' + this.avgCustArr[i] + 'cookies</li>');
+      } else {
+       listArr.push('<li>' + hours[i] + ':' + this.avgCustArr[i] + 'cookies</li>');
+      }
+    }
+    
+ 
+    listArr.push('<li>Totals: ' + this.totalCooks + 'cookies</li>');
+ 
+    var fullString = listArr.join('');
+    list.innerHTML = fullString;
+    document.body.appendChild(list)
+   
+  }
+ 
+ }
+ 
+ 
+ 
+ Alki.calculateCustPerHour();
+ Alki.calculateCookiesSoldEachHour();
+ Alki.listThings();
 
 
 
