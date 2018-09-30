@@ -4,7 +4,7 @@ var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '
 
 var form = document.getElementById('stores_form');
 var tables = document.getElementById('shell');
-var data
+
 
 //Constructor for all stores-Lab 7
 var Store = function(name, min, max, avgCookiesPerHour){
