@@ -1,7 +1,33 @@
-
-table {
-  border-collapse: collapse;
+* {
+  background-color: rgba(138, 18, 10, 0.568);
+  padding: 20px;
 }
-table, th, td {
-  border: 1px solid black;
+
+div {
+  border: 1px solid silver;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+h1 {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 50px;
+  color: sienna;
+  font-style: italic;
+  text-align: center;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+nav ul a {
+  float: left;
+  text-align: center;
+  color: sienna;
 }
