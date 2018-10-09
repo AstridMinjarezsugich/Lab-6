@@ -1,9 +1,9 @@
 * {
   background-color: rgba(138, 18, 10, 0.568);
-  padding: 20px;
+  margin: auto;
 }
 
-div {
+header {
   border: 1px solid silver;
   display: block;
   margin-left: auto;
@@ -26,8 +26,18 @@ img {
   width: 50%;
 }
 
-nav ul a {
-  float: left;
-  text-align: center;
+nav {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 15px;
   color: sienna;
+  font-style: italic;
+  text-align: center;
+  margin-top: 10px
+}
+
+#stores_form {
+  width: 310px;
+  margin-top: 20px;
+  border: 5px solid sienna;
+  line-height: 1.6em;
 }
