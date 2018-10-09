@@ -26,18 +26,19 @@ img {
   width: 50%;
 }
 
-nav {
+nav ul a {
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 15px;
   color: sienna;
   font-style: italic;
-  text-align: center;
-  margin-top: 10px
+  text-align: auto;
+  margin-top: 10px;
 }
 
 #stores_form {
   width: 310px;
   margin-top: 20px;
+  margin-bottom: 20px;
   border: 5px solid sienna;
   line-height: 1.6em;
 }

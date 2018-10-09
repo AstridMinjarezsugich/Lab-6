@@ -2,7 +2,6 @@
 var storehours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
 // var with array with the storehours open
 var table = document.getElementById('store-table');
-
 // store constructor function
 var Store = function (name, min, max, avgCookiesPerHour) {
   this.name = name; // name of store
@@ -14,7 +13,6 @@ var Store = function (name, min, max, avgCookiesPerHour) {
   storeArray.push(this);
 };
 var storeArray = [];
-
 
 // one hour of cookies sold, produced by random number
 Store.prototype.custHourly = function() {
@@ -60,6 +58,16 @@ renderStores();
 //Table Rendering
 var storeTableEL = document.getElementById('store-table');
 
+var renderAsATableHeader = function(){
+  var trowEl = document.createElement('tHead');
+  for(var h = 0; h < storehours.length; h++){
+    var tdEl = document.createElement('td');
+    tdEl.textContent = storehours[h];
+    trowEl.appendChild(tdEl);
+  }
+  storeTableEL.appendChild(trowEl);
+};
+
 var renderAsATableRow = function(){
   for(var i = 0; i < storeArray.length; i++) {
     storeArray[i].totalSales();
@@ -79,7 +87,24 @@ var renderAsATableRow = function(){
   }
 };
 
+var renderAsATableFooter = function(){
+  var trEl = document.createElement('tFoot');
+  var thEl = document.createElement('th');
+  thEl.textContent = 'total';
+  trEl.appendChild(thEl);
+  for(var i = 1; i < storehours.length - 1; i++) {
+    var hourlytotal = 0;
+    for(var t = 0; t < storeArray.length; t++) {
+      var tdEl = document.createElement('td');
+      hourlytotal += storeArray[t].cookiesSoldEachHour[i - 1];
+    }
+    tdEl.textContent = hourlytotal;
+    trEl.appendChild(tdEl);
+    storeTableEL.appendChild(trEl);
+  }
+};
 //Rendering for Stores
+renderAsATableHeader();
 renderAsATableRow();
-
+renderAsATableFooter();
 
